@@ -62,6 +62,7 @@ Fixed& Fixed::operator=(const Fixed &other)
 	return (*this);
 }
 
+// operator const 확인
 bool Fixed::operator>(const Fixed &other) const
 {
 	if (toInt() > other.toInt())
