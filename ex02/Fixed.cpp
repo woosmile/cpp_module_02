@@ -1,5 +1,10 @@
 #include "Fixed.hpp"
 
+//toInt, toFloat로 반환하는 것을 getrawbits로 바꾸기
+//값 할당하는 것을 setter로
+//증감 연산자 값 자체 ++로 바꾸기, 후위 연산자의 경우에는 앞에 const (a++)++ 같은 경우 고려
+//min, max 함수는 함수가 멤버변수를 바꾸지 않게하기 위해서 함수 뒤에 const
+
 Fixed::Fixed(): _fixed_point_nb(0)
 {
 }
@@ -57,7 +62,7 @@ Fixed& Fixed::operator=(const Fixed &other)
 	return (*this);
 }
 
-bool Fixed::operator>(const Fixed &other)
+bool Fixed::operator>(const Fixed &other) const
 {
 	if (toInt() > other.toInt())
 		return (true);
@@ -65,7 +70,7 @@ bool Fixed::operator>(const Fixed &other)
 		return (false);
 }
 
-bool Fixed::operator<(const Fixed &other)
+bool Fixed::operator<(const Fixed &other) 
 {
 	if (toInt() < other.toInt())
 		return (true);
@@ -181,7 +186,7 @@ Fixed&	Fixed::min(Fixed &left, Fixed &right)
 
 const Fixed&	Fixed::min(const Fixed &left, const Fixed &right)
 {
-	if (left.toInt() > right.toInt())
+	if (left > right)
 		return (right);
 	else
 		return (left);

@@ -16,7 +16,7 @@ class Fixed
 		Fixed(const Fixed &other);
 		~Fixed();
 		Fixed&				operator=(const Fixed &other);
-		bool				operator>(const Fixed &other);
+		bool				operator>(const Fixed &other) const;  //이러한 스타일 적용하기
 		bool				operator<(const Fixed &other);
 		bool				operator>=(const Fixed &other);
 		bool				operator<=(const Fixed &other);
