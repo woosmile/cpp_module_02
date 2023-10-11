@@ -1,10 +1,5 @@
 #include "Fixed.hpp"
 
-//toInt, toFloat로 반환하는 것을 getrawbits로 바꾸기
-//값 할당하는 것을 setter로
-//증감 연산자 값 자체 ++로 바꾸기, 후위 연산자의 경우에는 앞에 const (a++)++ 같은 경우 고려
-//min, max 함수는 함수가 멤버변수를 바꾸지 않게하기 위해서 함수 뒤에 const
-
 Fixed::Fixed(): _fixed_point_nb(0)
 {
 }
@@ -28,7 +23,7 @@ Fixed::~Fixed()
 {
 }
 
-void Fixed::setRawBits(int const raw)
+void	Fixed::setRawBits(int const raw)
 {
 	_fixed_point_nb = raw;
 }
@@ -55,124 +50,109 @@ std::ostream& operator<<(std::ostream &out, const Fixed &other)
 	return (out);
 }
 
-Fixed& Fixed::operator=(const Fixed &other)
+Fixed&	Fixed::operator=(const Fixed &other)
 {
 	if (this != &other)
 		_fixed_point_nb = other._fixed_point_nb;
 	return (*this);
 }
 
-// operator const 확인
-bool Fixed::operator>(const Fixed &other) const
+bool	Fixed::operator>(const Fixed &other) const
 {
-	if (toInt() > other.toInt())
+	if (getRawBits() > other.getRawBits())
 		return (true);
 	else
 		return (false);
 }
 
-bool Fixed::operator<(const Fixed &other) 
+bool	Fixed::operator<(const Fixed &other) const
 {
-	if (toInt() < other.toInt())
+	if (getRawBits() < other.getRawBits())
 		return (true);
 	else
 		return (false);
 }
 
-bool Fixed::operator>=(const Fixed &other)
+bool	Fixed::operator>=(const Fixed &other) const
 {
-	if (toInt() >= other.toInt())
+	if (getRawBits() >= other.getRawBits())
 		return (true);
 	else
 		return (false);
 }
 
-bool Fixed::operator<=(const Fixed &other)
+bool	Fixed::operator<=(const Fixed &other) const
 {
-	if (toInt() <= other.toInt())
+	if (getRawBits() <= other.getRawBits())
 		return (true);
 	else
 		return (false);
 }
 
-bool Fixed::operator==(const Fixed &other)
+bool	Fixed::operator==(const Fixed &other) const
 {
-	if (toInt() == other.toInt())
+	if (getRawBits() == other.getRawBits())
 		return (true);
 	else
 		return (false);
 }
 
-bool Fixed::operator!=(const Fixed &other)
+bool	Fixed::operator!=(const Fixed &other) const
 {
-	if (toInt() != other.toInt())
+	if (getRawBits() != other.getRawBits())
 		return (true);
 	else
 		return (false);
 }
 
-Fixed& Fixed::operator+(const Fixed &other)
+Fixed	Fixed::operator+(const Fixed &other)
 {
-	_fixed_point_nb = (toFloat() + other.toFloat()) * (1 << _fractional_bits);
-	
-	return (*this);
+	return (Fixed(toFloat() + other.toFloat()));
 }
 
-Fixed& Fixed::operator-(const Fixed &other)
+Fixed	Fixed::operator-(const Fixed &other)
 {
-	_fixed_point_nb = (toFloat() - other.toFloat()) * (1 << _fractional_bits);
-
-	return (*this);
+	return (Fixed(toFloat() - other.toFloat()));
 }
 
-Fixed& Fixed::operator*(const Fixed &other)
+Fixed	Fixed::operator*(const Fixed &other)
 {
-	_fixed_point_nb = (toFloat() * other.toFloat()) * (1 << _fractional_bits);
-
-	return (*this);
+	return (Fixed(toFloat() * other.toFloat()));
 }
 
-Fixed& Fixed::operator/(const Fixed &other)
+Fixed	Fixed::operator/(const Fixed &other)
 {
-	_fixed_point_nb = (toFloat() / other.toFloat()) * (1 << _fractional_bits);
-
-	return (*this);
+	return (Fixed(toFloat() / other.toFloat()));
 }
 
-Fixed& Fixed::operator++()
+Fixed&	Fixed::operator++()
 {
-	Fixed	add((float)0.00390625);
-
-	_fixed_point_nb = _fixed_point_nb + add.getRawBits();
+	_fixed_point_nb++;
 
 	return (*this);
 }
 
-Fixed Fixed::operator++(int)
+Fixed const	Fixed::operator++(int)
 {
 	Fixed	temp(*this);
-	Fixed	add((float)0.00390625);
 
-	_fixed_point_nb = _fixed_point_nb + add.getRawBits();
+	_fixed_point_nb++;
 
 	return (temp);
 }
 
-Fixed& Fixed::operator--()
+Fixed&	Fixed::operator--()
 {
-	Fixed	sub((float)0.00390625);
-
-	_fixed_point_nb = _fixed_point_nb - sub.getRawBits();
+	_fixed_point_nb--;
 
 	return (*this);
 }
 
-Fixed Fixed::operator--(int)
+Fixed const	Fixed::operator--(int)
 {
 	Fixed	temp(*this);
-	Fixed	sub((float)0.00390625);
 
-	_fixed_point_nb = _fixed_point_nb - sub.getRawBits();
+	_fixed_point_nb--;
 
 	return (temp);
 }
@@ -203,7 +183,7 @@ Fixed&	Fixed::max(Fixed &left, Fixed &right)
 
 const Fixed&	Fixed::max(const Fixed &left, const Fixed &right)
 {
-	if (left.toInt() < right.toInt())
+	if (left < right)
 		return (right);
 	else
 		return (left);
