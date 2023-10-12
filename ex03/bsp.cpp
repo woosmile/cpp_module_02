@@ -10,21 +10,19 @@ float	getVecCrossProd(Point const v1, Point const v2)
 	return ((v1.getFloatX() * v2.getFloatY()) - (v1.getFloatY() * v2.getFloatX()));
 }
 
-bool	checkDirection(Fixed v1, Fixed v2)
+bool	checkDirection(float vec_cross_1, float vec_cross_2)
 {
-	Fixed	zero;
-
-	if (v1 == zero || v2 == zero)
+	if (vec_cross_1 == 0 || vec_cross_2 == 0)
 	{
 		return (false);
 	}
 	else
 	{
-		if (v1 > zero && v2 < zero)
+		if (vec_cross_1 > 0 && vec_cross_2 < 0)
 		{
 			return (false);
 		}
-		else if (v1 < zero && v2 > zero)
+		else if (vec_cross_1 < 0 && vec_cross_2 > 0)
 		{
 			return (false);
 		}
