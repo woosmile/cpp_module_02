@@ -10,7 +10,7 @@ int main(void)
 	Point p2(6,2);
 	Point p3(8,4);
 	Point p4(6,4);
-	Point p5(4.32390624,3.76);
+	Point p5(4.32,3.76);
 
 	if (bsp(a, b, c, p5) == true)
 		std::cout << "True" << std::endl;
