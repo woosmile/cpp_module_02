@@ -12,10 +12,30 @@ int main(void)
 	Point p4(6,4);
 	Point p5(4.32,3.76);
 
-	if (bsp(a, b, c, p5) == true)
-		std::cout << "True" << std::endl;
+	if (bsp(a, b, c, p1) == true)
+		std::cout << "p1 : True" << std::endl;
 	else
-		std::cout << "False" << std::endl;
+		std::cout << "p1 : False" << std::endl;
+
+	if (bsp(a, b, c, p2) == true)
+		std::cout << "p2 : True" << std::endl;
+	else
+		std::cout << "p2 : False" << std::endl;
+
+	if (bsp(a, b, c, p3) == true)
+		std::cout << "p3 : True" << std::endl;
+	else
+		std::cout << "p3 : False" << std::endl;
+
+	if (bsp(a, b, c, p4) == true)
+		std::cout << "p4 : True" << std::endl;
+	else
+		std::cout << "p4 : False" << std::endl;
+
+	if (bsp(a, b, c, p5) == true)
+		std::cout << "p5 : True" << std::endl;
+	else
+		std::cout << "p5 : False" << std::endl;
 	
 	return (0);
 }
