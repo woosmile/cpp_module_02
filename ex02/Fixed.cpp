@@ -59,7 +59,7 @@ Fixed&	Fixed::operator=(const Fixed &other)
 
 bool	Fixed::operator>(const Fixed &other) const
 {
-	if (getRawBits() > other.getRawBits())
+	if (_fixed_point_nb > other._fixed_point_nb)
 		return (true);
 	else
 		return (false);
@@ -67,7 +67,7 @@ bool	Fixed::operator>(const Fixed &other) const
 
 bool	Fixed::operator<(const Fixed &other) const
 {
-	if (getRawBits() < other.getRawBits())
+	if (_fixed_point_nb < other._fixed_point_nb)
 		return (true);
 	else
 		return (false);
@@ -75,7 +75,7 @@ bool	Fixed::operator<(const Fixed &other) const
 
 bool	Fixed::operator>=(const Fixed &other) const
 {
-	if (getRawBits() >= other.getRawBits())
+	if (_fixed_point_nb >= other._fixed_point_nb)
 		return (true);
 	else
 		return (false);
@@ -83,7 +83,7 @@ bool	Fixed::operator>=(const Fixed &other) const
 
 bool	Fixed::operator<=(const Fixed &other) const
 {
-	if (getRawBits() <= other.getRawBits())
+	if (_fixed_point_nb <= other._fixed_point_nb)
 		return (true);
 	else
 		return (false);
@@ -91,7 +91,7 @@ bool	Fixed::operator<=(const Fixed &other) const
 
 bool	Fixed::operator==(const Fixed &other) const
 {
-	if (getRawBits() == other.getRawBits())
+	if (_fixed_point_nb == other._fixed_point_nb)
 		return (true);
 	else
 		return (false);
@@ -99,7 +99,7 @@ bool	Fixed::operator==(const Fixed &other) const
 
 bool	Fixed::operator!=(const Fixed &other) const
 {
-	if (getRawBits() != other.getRawBits())
+	if (_fixed_point_nb != other._fixed_point_nb)
 		return (true);
 	else
 		return (false);

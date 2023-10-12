@@ -28,12 +28,12 @@ Point::~Point()
 {
 }
 
-Fixed	Point::getX(void) const
+float	Point::getFloatX(void) const
 {
-	return (_x);
+	return (_x.toFloat());
 }
 
-Fixed	Point::getY(void) const
+float	Point::getFloatY(void) const
 {
-	return (_y);
+	return (_y.toFloat());
 }

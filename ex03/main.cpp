@@ -1,26 +1,21 @@
 #include "Point.hpp"
 
-void test(void)
-{
-	system("leaks a.out");
-}
-
 int main(void)
 {
-	// atexit(test);
-	Point a(2,2);
-	Point b(5,6);
-	Point c(6,4);
+	Point a(6,6);
+	Point b(3,2);
+	Point c(10,2);
 
-	Point p1(-1,1);
-	Point p2(2,6);
-	Point p3(4,4);
-	Point p4(5,2);
-	Point p5(0,0);
+	Point p1(0,0);
+	Point p2(6,2);
+	Point p3(8,4);
+	Point p4(6,4);
+	Point p5(4.32390624,3.76);
 
-	if (bsp(a, b, c, p3) == true)
-		std::cout << "OK!!!" << std::endl;
+	if (bsp(a, b, c, p5) == true)
+		std::cout << "True" << std::endl;
 	else
-		std::cout << "No inner" << std::endl;
+		std::cout << "False" << std::endl;
+	
 	return (0);
 }

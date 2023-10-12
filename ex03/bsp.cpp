@@ -1,66 +1,53 @@
 #include "Point.hpp"
 
-bool bsp(Point const a, Point const b, Point const c, Point const point)
+Point	getVec(Point const start, Point const end)
 {
+	return (Point(end.getFloatX() - start.getFloatX(), end.getFloatY() - start.getFloatY()));
+}
 
-	Point	vec_a(b.getX().toFloat() - a.getX().toFloat(), b.getY().toFloat() - a.getY().toFloat());
-	Point	vec_b(c.getX().toFloat() - b.getX().toFloat(), c.getY().toFloat() - b.getY().toFloat());
-	Point	vec_c(c.getX().toFloat() - a.getX().toFloat(), c.getY().toFloat() - a.getY().toFloat());
+float	getVecCrossProd(Point const v1, Point const v2)
+{
+	return ((v1.getFloatX() * v2.getFloatY()) - (v1.getFloatY() * v2.getFloatX()));
+}
 
-	Point	vec_ap(point.getX().toFloat() - a.getX().toFloat(), point.getY().toFloat() - a.getY().toFloat());
-	Point	vec_bp(point.getX().toFloat() - b.getX().toFloat(), point.getY().toFloat() - b.getY().toFloat());
-	Point	vec_cp(point.getX().toFloat() - c.getX().toFloat(), point.getY().toFloat() - c.getY().toFloat());
+bool	checkDirection(Fixed v1, Fixed v2)
+{
+	Fixed	zero;
 
-	Fixed	vec_tri_cross = (vec_a.getX().toFloat() * vec_c.getY().toFloat()) - (vec_a.getY().toFloat() * vec_c.getX().toFloat());
-	Fixed	vec_point_cross = (vec_a.getX().toFloat() * vec_ap.getY().toFloat()) - (vec_a.getY().toFloat() * vec_ap.getX().toFloat());
-
-		std::cout << vec_tri_cross.toFloat() << std::endl;
-			std::cout << vec_point_cross.toFloat() << std::endl;
-	if (vec_tri_cross.toFloat() > 0)
+	if (v1 == zero || v2 == zero)
 	{
-		if (vec_point_cross.toFloat() <= 0)
+		return (false);
+	}
+	else
+	{
+		if (v1 > zero && v2 < zero)
+		{
+			return (false);
+		}
+		else if (v1 < zero && v2 > zero)
 		{
 			return (false);
 		}
 	}
-	else if (vec_tri_cross.toFloat()  == 0)
-		return (false);
-	else if (vec_tri_cross.toFloat()  < 0)
-	{
-		if (vec_point_cross.toFloat()  >= 0)
-			return (false);
-	}
-	std::cout << "2" << std::endl;
-	vec_tri_cross = (vec_b.getX().toFloat() * vec_a.getY().toFloat()) - (vec_b.getY().toFloat() * vec_a.getX().toFloat());
-	vec_point_cross = (vec_b.getX().toFloat() * vec_bp.getY().toFloat()) - (vec_b.getY().toFloat() * vec_bp.getX().toFloat());
+	return (true);
+}
 
-	if (vec_tri_cross.toFloat()  > 0)
+bool bsp(Point const a, Point const b, Point const c, Point const point)
+{
+	Point	vec_ab = getVec(a, b);
+	Point	vec_bc = getVec(b, c);
+	Point	vec_ca = getVec(c, a);
+
+	Point	vec_ap = getVec(a, point);
+	Point	vec_bp = getVec(b, point);
+	Point	vec_cp = getVec(c, point);
+
+	if (!checkDirection(getVecCrossProd(vec_ab, vec_bc), getVecCrossProd(vec_ab, vec_ap)) || \
+		!checkDirection(getVecCrossProd(vec_bc, vec_ca), getVecCrossProd(vec_bc, vec_bp)) || \
+		!checkDirection(getVecCrossProd(vec_ca, vec_ab), getVecCrossProd(vec_ca, vec_cp)))
 	{
-		if (vec_point_cross.toFloat()  <= 0)
-			return (false);
-	}
-	else if (vec_tri_cross.toFloat()  == 0)
 		return (false);
-	else if (vec_tri_cross.toFloat()  < 0)
-	{
-		if (vec_point_cross.toFloat()  >= 0)
-			return (false);
 	}
 
-	vec_tri_cross = (vec_c.getX().toFloat() * vec_a.getY().toFloat()) - (vec_c.getY().toFloat() * vec_a.getX().toFloat());
-	vec_point_cross = (vec_c.getX().toFloat() * vec_cp.getY().toFloat()) - (vec_c.getY().toFloat() * vec_cp.getX().toFloat());
-
-	if (vec_tri_cross.toFloat() > 0)
-	{
-		if (vec_point_cross.toFloat() <= 0)
-			return (false);
-	}
-	else if (vec_tri_cross.toFloat() == 0)
-		return (false);
-	else if (vec_tri_cross.toFloat() < 0)
-	{
-		if (vec_point_cross.toFloat() >= 0)
-			return (false);
-	}
 	return (true);
 }
