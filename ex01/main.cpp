@@ -19,5 +19,14 @@ int	main(void)
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 
+	std::cout << "a is " << a.toFloat() << " as float" << std::endl;
+	std::cout << "b is " << b.toFloat() << " as float" << std::endl;
+	std::cout << "c is " << c.toFloat() << " as float" << std::endl;
+	std::cout << "d is " << d.toFloat() << " as float" << std::endl;
+
+	a.setRawBits(5 << 8);
+	std::cout << "a is " << a << std::endl;
+	std::cout << "a raw bit is " << a.getRawBits() << std::endl;
+
 	return (0);
 }
