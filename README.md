@@ -1,4 +1,4 @@
-# cpp_module_02
+# CPP Module 02
 
 ## 학습 내용
 - OCF(Orthodox Canonical Form) 학습
